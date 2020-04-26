@@ -21,11 +21,13 @@ namespace Laboratorio05
             // del evento y del metodo que se le suscribe deben ser igual (object y eventargs)
             //1- Suscribir OnRegistrado de mailSender para que escuche el evento Registrado enviado por servidor
             server.Registered += mailSender.OnRegistered;
+            //1.1- Suscribir OnEmailSent de mailsender para que escuche el evento registrado enviado por servidor
+            server.EmailSent += mailSender.OnEmailSent;
             //2- Suscribir OnCambiadaContrasena de mailSender para que escuche el evento CambiadaContrasena enviado por servidor
             server.PasswordChanged += mailSender.OnPasswordChanged;
             //3- Suscribir OnCambiadaContrasena de smsSender para que escuche el evento CambiadaContrasena enviado por servidor
             server.PasswordChanged += smsSender.OnPasswordChanged;
-
+            
 
             // Controla la ejecucion mientras el usuario no quiera salir
             bool exec = true;

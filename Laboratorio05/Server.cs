@@ -39,6 +39,16 @@ namespace Laboratorio05
             }
         }
 
+        public delegate void EmailSentEventHandler(object source, EventArgs args);
+        public event EmailSentEventHandler EmailSent;
+        protected virtual void OnEmailSent()
+        {
+            if (EmailSent != null)
+            {
+                // Engatilla el evento
+                EmailSent(this, EventArgs.Empty);
+            }
+        }
 
         // Atributo BaseDatos
         public DataBase Data { get; }
@@ -72,6 +82,7 @@ namespace Laboratorio05
             {
                 // Disparamos el evento
                 OnRegistered(usr, psswd, verificationlink: verificationLink, email: email);
+                OnEmailSent();
             }
             else
             {
