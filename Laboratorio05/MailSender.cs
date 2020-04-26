@@ -20,12 +20,7 @@ namespace Laboratorio05
             Console.WriteLine($"\nCorreo enviado a {e.Email}:  \n {e.Username}, te notificamos que la contrasena de tu cuenta PlusCorp ha sido cambiada. \n");
             Thread.Sleep(2000);
         }
-        public void OnEmailSent(object source, EventArgs args)
-        {
-            Thread.Sleep(2000);
-            Console.WriteLine("El correado ha sido exitosamente enviado");
-            Thread.Sleep(2000);
-        }
+        
 
     }
 }

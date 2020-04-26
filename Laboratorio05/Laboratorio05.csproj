@@ -39,6 +39,7 @@
     <Compile Include="Server.cs" />
     <Compile Include="SMSSender.cs" />
     <Compile Include="EmailSentEventArgs.cs" />
+    <Compile Include="User.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

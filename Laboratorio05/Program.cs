@@ -14,6 +14,7 @@ namespace Laboratorio05
             Server server = new Server(database);
             MailSender mailSender = new MailSender();
             SMSSender smsSender = new SMSSender();
+            User user = new User();
 
 
             //Suscribir los que escuchan los eventos
@@ -21,20 +22,24 @@ namespace Laboratorio05
             // del evento y del metodo que se le suscribe deben ser igual (object y eventargs)
             //1- Suscribir OnRegistrado de mailSender para que escuche el evento Registrado enviado por servidor
             server.Registered += mailSender.OnRegistered;
-            //1.1- Suscribir OnEmailSent de mailsender para que escuche el evento registrado enviado por servidor
-            server.EmailSent += mailSender.OnEmailSent;
             //2- Suscribir OnCambiadaContrasena de mailSender para que escuche el evento CambiadaContrasena enviado por servidor
             server.PasswordChanged += mailSender.OnPasswordChanged;
             //3- Suscribir OnCambiadaContrasena de smsSender para que escuche el evento CambiadaContrasena enviado por servidor
             server.PasswordChanged += smsSender.OnPasswordChanged;
-            
+
+
+            //1.1- Suscribir OnEmailSent de mailsender para que escuche el evento registrado enviado por servidor
+            server.EmailSent += user.OnEmailSent;
+            //1.2- Suscribir OnEmailVerified de mailsender para que escuche el evento registrado enviado por servidor
+            server.EmailVerified += server.OnEmailVerified;
+
 
             // Controla la ejecucion mientras el usuario no quiera salir
             bool exec = true;
             while (exec)
             {
                 // Pedimos al usuario una de las opciones
-                string chosen = ShowOptions(new List<string>() { "Registrarse", "Cambiar contrasena", "Salir" });
+                string chosen = ShowOptions(new List<string>() { "Registrarse", "Cambiar contrasena", "Verificar Correo","Salir" });
                 switch (chosen)
                 {
                     case "Registrarse":
@@ -44,6 +49,10 @@ namespace Laboratorio05
                     case "Cambiar contrasena":
                         Console.Clear();
                         server.ChangePassword();
+                        break;
+                    case "Verificar Correo":
+                        Console.Clear();
+                        server.VerificacionCorreo();
                         break;
                     case "Salir":
                         exec = false;
