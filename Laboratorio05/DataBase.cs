@@ -77,5 +77,27 @@ namespace Laboratorio05
             }
             return "Usuario o contrasena incorrecta";
         }
+        //Metodo que verifica si efectivamente data esta vacio o no.
+
+        int cont = 1;
+        public bool IsData()
+        {
+            if (this.registered.Count == cont)
+            {
+                cont += 1;
+                return true;
+            }
+            else if (this.registered.Count != cont)
+            {
+                return false;
+            }
+            else
+                return false;
+        }
+
+
+
+
     }
 }
+

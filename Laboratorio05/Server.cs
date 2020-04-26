@@ -39,36 +39,12 @@ namespace Laboratorio05
             }
         }
 
-        public delegate void EmailSentEventHandler(object source, EventArgs args);
-        public event EmailSentEventHandler EmailSent;
-        protected virtual void OnEmailSent()
-        {
-            if (EmailSent != null)
-            {
-                // Engatilla el evento
-                EmailSent(this, EventArgs.Empty);
-            }
-        }
-
         public void OnEmailVerified(object source, EventArgs args)
         {
             Thread.Sleep(2000);
             Console.WriteLine("Ha sido verificado de manera exitosa.");
             Thread.Sleep(2000);
         }
-        public delegate void EmailVerifiedEventHandler(object source, EventArgs args);
-        public event EmailVerifiedEventHandler EmailVerified;
-        protected virtual void OnEmailVerified()
-        {
-            if (EmailVerified != null)
-            {
-                // Engatilla el evento
-                EmailVerified(this, EventArgs.Empty);
-            }
-        }
-
-
-
 
 
         // Atributo BaseDatos
@@ -103,7 +79,7 @@ namespace Laboratorio05
             {
                 // Disparamos el evento
                 OnRegistered(usr, psswd, verificationlink: verificationLink, email: email);
-                OnEmailSent();
+                
             }
             else
             {
@@ -153,26 +129,6 @@ namespace Laboratorio05
             return "http://pluscorporation.com/verificar-correo.php?=" + usr + "_" + result;
 
         }
-        public void VerificacionCorreo()
-        {
-            Console.WriteLine("Ingresa tu nombre de usuario: ");
-            string usr = Console.ReadLine();
-            if (Data.GetData(usr)!=null)
-            {
-                Console.WriteLine("Desea verificar su correo electronico? (Si/No)");
-                string str = Console.ReadLine();
-                if (str == "Si")
-                {
-                    Console.WriteLine("Su correo:");
-                    Console.WriteLine(Data.GetData(usr)[1]);
-                    OnEmailVerified();
-
-
-                }
-            }
-            
-            
-            
-        }
+        
     }
 }

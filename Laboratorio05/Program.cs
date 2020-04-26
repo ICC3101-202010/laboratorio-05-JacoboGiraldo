@@ -28,10 +28,10 @@ namespace Laboratorio05
             server.PasswordChanged += smsSender.OnPasswordChanged;
 
 
-            //1.1- Suscribir OnEmailSent de mailsender para que escuche el evento registrado enviado por servidor
-            server.EmailSent += user.OnEmailSent;
-            //1.2- Suscribir OnEmailVerified de mailsender para que escuche el evento registrado enviado por servidor
-            server.EmailVerified += server.OnEmailVerified;
+            //1.1- Suscribir OnEmailSent de user para que escuche el evento registrado enviado por mailSender
+            mailSender.EmailSent += user.OnEmailSent;
+            //1.2- Suscribir OnEmailVerified de server para que escuche el evento registrado enviado por user
+            user.EmailVerified += server.OnEmailVerified;
 
 
             // Controla la ejecucion mientras el usuario no quiera salir
@@ -45,6 +45,7 @@ namespace Laboratorio05
                     case "Registrarse":
                         Console.Clear();
                         server.Register();
+                        mailSender.ESent(database);
                         break;
                     case "Cambiar contrasena":
                         Console.Clear();
@@ -52,7 +53,7 @@ namespace Laboratorio05
                         break;
                     case "Verificar Correo":
                         Console.Clear();
-                        server.VerificacionCorreo();
+                        user.VerificacionCorreo(database);
                         break;
                     case "Salir":
                         exec = false;
